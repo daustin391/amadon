@@ -23,7 +23,7 @@ def checkout(request):
 
 def process(request):
     quantity_from_form = int(request.POST["quantity"])
-    price_from_form = float(request.POST["price"])
+    price_from_form = float(Product.objects.get(id=request.POST["price"]).price)
     total_charge = quantity_from_form * price_from_form
     print("Charging credit card...")
     Order.objects.create(quantity_ordered=quantity_from_form, total_price=total_charge)
